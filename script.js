@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function(){
   const progress = document.getElementById("progress");
   const toTop = document.getElementById("toTop");
   const navLinks = document.querySelectorAll("nav a");
-  const sections = ["home","about","services","rentals","contact"].map(id=>document.getElementById(id));
+  const sections = ["home","about","services","rentals","quote","faq","contact"].map(id=>document.getElementById(id));
 
   window.addEventListener("scroll", function(){
     const h = document.documentElement;
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function(){
   });
   toTop.addEventListener("click", ()=> window.scrollTo({top:0, behavior:"smooth"}));
 
-  const phrases = ["Just Groovings", "Pocket & Feel", "Artist "];
+  const phrases = ["Just Groovings", "Pocket & Feel", "Artist || Brand Ambassador || CELEBRITY DRUMMER🥁"];
   const tagEl = document.getElementById("rotatingTag");
   let pi = 0, ci = 0, deleting = false;
   function typeLoop(){
@@ -44,8 +44,6 @@ document.addEventListener("DOMContentLoaded", function(){
     else if(deleting && ci === 0){ deleting = false; pi = (pi+1) % phrases.length; delay = 300; }
     setTimeout(typeLoop, delay);
   }
-
-
   typeLoop();
 
   const notesWrap = document.getElementById("notes");
@@ -61,9 +59,19 @@ document.addEventListener("DOMContentLoaded", function(){
     notesWrap.appendChild(n);
   }
 
+  /* live availability badge */
+  const availBadge = document.getElementById("availBadge");
+  if(availBadge){
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const now = new Date();
+    availBadge.innerHTML = '<span class="dot"></span>Booking open for ' + months[now.getMonth()] + ' ' + now.getFullYear();
+  }
+
+  /* quote calculator */
   const quoteChecks = document.querySelectorAll('#quoteList input[type="checkbox"]');
   const qTotalEl = document.getElementById("qTotal");
   const quoteBtn = document.getElementById("quoteBtn");
+  const discountNote = document.getElementById("discountNote");
   function updateQuote(){
     let total = 0;
     const items = [];
@@ -74,6 +82,7 @@ document.addEventListener("DOMContentLoaded", function(){
       }
     });
     qTotalEl.textContent = "GH₵" + total;
+    discountNote.classList.toggle("show", items.length >= 2);
     const msg = items.length
       ? "Hi Kwamepapa - I'd like a quote for: " + items.join(", ") + ". Estimated total: GH₵" + total
       : "Hi Kwamepapa - I'd like to get a quote";
@@ -82,4 +91,26 @@ document.addEventListener("DOMContentLoaded", function(){
   quoteChecks.forEach(cb=> cb.addEventListener("change", updateQuote));
   updateQuote();
 
+  /* share button */
+  const shareBtn = document.getElementById("shareBtn");
+  if(shareBtn){
+    shareBtn.addEventListener("click", async ()=>{
+      const shareData = { title: document.title, text: "Check out Kwamepapa's page:", url: window.location.href };
+      try{
+        if(navigator.share){ await navigator.share(shareData); }
+        else{
+          await navigator.clipboard.writeText(window.location.href);
+          shareBtn.textContent = "✅ Link Copied!";
+          setTimeout(()=> shareBtn.textContent = "🔗 Share This Page", 2000);
+        }
+      }catch(err){ /* user cancelled share */ }
+    });
+  }
+
+  /* FAQ accordion */
+  document.querySelectorAll(".faq-item").forEach(item=>{
+    item.querySelector(".faq-q").addEventListener("click", ()=>{
+      item.classList.toggle("open");
+    });
+  });
 });
