@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function(){
   const bookBtn = document.getElementById("bookBtn");
   if(bookBtn){
     bookBtn.addEventListener("click", function(){
-      window.open("https://wa.me/233503498510?text=Hi%20Kwamepapa%20-%20I'm%20from%20your%20website%20and%20want%20to%20book%20you","_blank");
+      window.open("https://wa.me/233503498510?text=Hi%20Kwamepapaa%20-%20I'm%20from%20your%20website%20and%20want%20to%20book%20you","_blank");
     });
   }
 
@@ -84,8 +84,8 @@ document.addEventListener("DOMContentLoaded", function(){
     qTotalEl.textContent = "GH₵" + total;
     discountNote.classList.toggle("show", items.length >= 2);
     const msg = items.length
-      ? "Hi Kwamepapa - I'd like a quote for: " + items.join(", ") + ". Estimated total: GH₵" + total
-      : "Hi Kwamepapa - I'd like to get a quote";
+      ? "Hi Kwamepapaa - I'd like a quote for: " + items.join(", ") + ". Estimated total: GH₵" + total
+      : "Hi Kwamepapaa - I'd like to get a quote";
     quoteBtn.href = "https://wa.me/233503498510?text=" + encodeURIComponent(msg);
   }
   quoteChecks.forEach(cb=> cb.addEventListener("change", updateQuote));
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function(){
   const shareBtn = document.getElementById("shareBtn");
   if(shareBtn){
     shareBtn.addEventListener("click", async ()=>{
-      const shareData = { title: document.title, text: "Check out Kwamepapa's page:", url: window.location.href };
+      const shareData = { title: document.title, text: "Check out Kwamepapaa's page:", url: window.location.href };
       try{
         if(navigator.share){ await navigator.share(shareData); }
         else{
