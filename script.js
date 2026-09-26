@@ -1,6 +1,11 @@
 document.addEventListener("DOMContentLoaded", function(){
 
-  
+  const bookBtn = document.getElementById("bookBtn");
+  if(bookBtn){
+    bookBtn.addEventListener("click", function(){
+      window.open("https://wa.me/233503498510?text=Hi%20Kwamepapaa%20-%20I'm%20from%20your%20website%20and%20want%20to%20book%20you","_blank");
+    });
+  }
 
   const cards = document.querySelectorAll(".card");
   const revealObs = new IntersectionObserver((entries)=>{
