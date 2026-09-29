@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kwamepapaa.netlify.app/sitemap.xml
